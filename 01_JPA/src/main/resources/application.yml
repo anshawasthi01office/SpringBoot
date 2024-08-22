@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/jpa01?createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MariaDBDialect
+
+  application:
+    name: 01_JPA
+
+logging:
+  level:
+    org.springframework: DEBUG
+    org.hibernate: DEBUG
