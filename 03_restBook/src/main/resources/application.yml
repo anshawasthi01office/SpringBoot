@@ -14,7 +14,11 @@ spring:
   application:
     name: 03_restBook
 
-logging:
-  level:
-    org.springframework: DEBUG
-    org.hibernate: DEBUG
+#logging:
+#  level:
+#    org.springframework: DEBUG
+#    org.hibernate: DEBUG
+#logging:
+#  level:
+#    org.springframework: INFO
+#    org.hibernate: INFO
