@@ -14,6 +14,13 @@ spring:
   application:
     name: 03_restBook
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 300MB
+      file-size-threshold: 1KB # Files larger than 1KB will be written to disk
+                
+
 #logging:
 #  level:
 #    org.springframework: DEBUG
