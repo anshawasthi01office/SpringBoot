@@ -51,7 +51,34 @@
                         <input type="text" id="customerName" class="form-input flex-1 p-2 text-sm border border-gray-300"
                             placeholder="Enter Customer Name">
                     </div>
+                    
+                    <div class="flex items-center mb-4">
+                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Remark</label>
+                        <input type="text" id="remarks" class="form-input flex-1 p-2 text-sm border border-gray-300"
+                            placeholder="Enter Remark">
+                    </div>
 
+
+
+                    <div class="flex items-center mb-4">
+                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id"> Price</label>
+                        <input type="text" id="price" class="form-input flex-1 p-2 text-sm border border-gray-300"
+                            placeholder="Enter Price">
+                    </div>
+                    
+                    <div class="flex items-center mb-4">
+                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Discount</label>
+                        <input type="text" id="discount" class="form-input flex-1 p-2 text-sm border border-gray-300"
+                            placeholder="Enter Discount">
+                    </div>
+                    
+
+                    <div class="flex items-center mb-4">
+                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Address</label>
+                        <input type="text" id="address" class="form-input flex-1 p-2 text-sm border border-gray-300"
+                            placeholder="Enter Address">
+                    </div>
+                    
                     <div class="flex items-center mb-4">
                         <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Mobile</label>
                         <input type="text" id="mobile" class="form-input flex-1 p-2 text-sm border border-gray-300"
@@ -64,24 +91,6 @@
                             placeholder="Enter Email">
                     </div>
 
-                    <div class="flex items-center mb-4">
-                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Address</label>
-                        <input type="text" id="address" class="form-input flex-1 p-2 text-sm border border-gray-300"
-                            placeholder="Enter Address">
-                    </div>
-
-                    <div class="flex items-center mb-4">
-                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Quantity</label>
-                        <input type="text" id="quantity" class="form-input flex-1 p-2 text-sm border border-gray-300"
-                            placeholder="Enter Quantity">
-                    </div>
-
-                    <div class="flex items-center mb-4">
-                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Remark</label>
-                        <input type="text" id="remarks" class="form-input flex-1 p-2 text-sm border border-gray-300"
-                            placeholder="Enter Remark">
-                    </div>
-
 
                     <div class="flex items-center mb-4">
                         <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Purchased Quantity</label>
@@ -89,21 +98,28 @@
                             placeholder="Enter Purchased Quantity">
                     </div>
 
-
                     <div class="flex items-center mb-4">
-                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id"> Price</label>
-                        <input type="text" id="price" class="form-input flex-1 p-2 text-sm border border-gray-300"
-                            placeholder="Enter Price">
-                    </div>
-
-                    <div class="flex items-center mb-4">
-                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Discount</label>
-                        <input type="text" id="discount" class="form-input flex-1 p-2 text-sm border border-gray-300"
-                            placeholder="Enter Discount">
+                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Purchased Date</label>
+                        <input type="Date" id="purchasedDate" class="form-input flex-1 p-2 text-sm border border-gray-300"
+                            placeholder="Enter Purchased Date">
                     </div>
                     
-
-                </div>
+                    
+                    <div class="flex items-center mb-4">
+                        <label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="id">Delivery Date</label>
+                        <input type="Date" id="deliveryDate" class="form-input flex-1 p-2 text-sm border border-gray-300"
+                            placeholder="Enter Delivery Date">
+                    </div>
+                    
+					
+					<div class="flex items-center mb-4">
+    					<label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="supplier_id">Stock Name</label>
+    					<select id="stockId" class="form-input flex-1 p-2 text-sm border border-gray-300">
+        					<option value="">Select Stock</option>
+    					</select>
+                	</div>
+                	
+                	
                 <div class="container-fluid text-center p-4">
                     <div class="flex justify-center space-x-4">
                         <button type="button" onclick="addSale()"
@@ -126,6 +142,7 @@
 
     <!-- Link to external JavaScript file -->
     <script src="../../resources/js/sales.js"></script>
+    <script src="../../resources/js/addSales.js"></script>
 </body>
 
 </html>

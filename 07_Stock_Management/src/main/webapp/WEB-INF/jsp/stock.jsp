@@ -56,18 +56,18 @@
                     <div class="flex justify-center space-x-4">
                         <button type="button"
                             class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                            id="searchSaleBtn">
+                            id="searchStockByIdBtn">
                             Search
                         </button>
                         <button type="button"
                             class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                            id="viewAllSalesBtn">
+                            id="viewAllStocksBtn">
                             View All Records
                         </button>
-                        <a href="/addStock"
-                            class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                            Add Stock
-                        </a>
+						<a href="/addStock" 
+   							class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+   							Add Stock
+						</a>
                     </div>
                 </div>
 
@@ -79,6 +79,8 @@
 
     <!-- Link to external JavaScript file -->
     <script src="../../resources/js/stock.js"></script>
+    <script src="../../resources/js/getStock.js"></script>
+    
 </body>
 
 </html>

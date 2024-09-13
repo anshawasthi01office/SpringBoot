@@ -77,7 +77,8 @@
     </div>
 
     <!-- Link to external JavaScript file -->
-    <script src="../../resources/js/category.js"></script>
+    <script src="../../resources/js/sales.js"></script>
+    <script src="../../resources/js/getSales.js"></script>
 </body>
 
 </html>

@@ -5,6 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class RoutesController {
+	
+	@GetMapping("/")
+	public String categoryHome() {
+		System.out.println("/categoryHome");
+		return "category";
+	}
 
 	@GetMapping("/category")
 	public String category() {

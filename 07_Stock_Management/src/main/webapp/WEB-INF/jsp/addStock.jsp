@@ -70,16 +70,30 @@
                             placeholder="Enter Description">
                     </div>
                     
+					<div class="flex items-center mb-4">
+    					<label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="category_id">Category</label>
+    					<select id="category_name" class="form-input flex-1 p-2 text-sm border border-gray-300">
+        					<option value="">Select Category</option>
+    					</select>
+					</div>
+
+					<div class="flex items-center mb-4">
+    					<label class="w-full md:w-1/4 text-left font-medium text-gray-700 required" for="supplier_id">Supplier</label>
+    					<select id="supplier_name" class="form-input flex-1 p-2 text-sm border border-gray-300">
+        					<option value="">Select Supplier</option>
+    					</select>
+					</div>
+
                 </div>
                 <div class="container-fluid text-center p-4">
                     <div class="flex justify-center space-x-4">
                         <button type="button" onclick="addStock()"
                             class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                            id="submitBtn1">
+                            >
                             Add
                         </button>
 
-                        <a href="/stock"
+                        <a href="/stock" 
                             class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                             View Stocks
                         </a>
@@ -93,6 +107,7 @@
 
     <!-- Link to external JavaScript file -->
     <script src="../../resources/js/stock.js"></script>
+    <script src="../../resources/js/addStock.js"></script>
 </body>
 
 </html>

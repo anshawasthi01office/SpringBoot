@@ -82,6 +82,7 @@
 
     <!-- Link to external JavaScript file -->
     <script src="../../resources/js/supplier.js"></script>
+    <script src="../../resources/js/getSupplier.js"></script>
 </body>
 
 </html>

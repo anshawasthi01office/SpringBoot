@@ -1,6 +1,20 @@
-const API_BASE_URL = 'https://d070-103-55-91-195.ngrok-free.app/supplier';
+const API_BASE_URL = 'https://0d9f-103-55-91-195.ngrok-free.app';
 
-// Function to add a new supplier record
+
+
+async function addSupplierApi(name, contact_info){
+	return await fetch(`${API_BASE_URL}/supplier/createSupplier`, {
+	            method: 'POST',
+				    headers: {
+				        'Content-Type': 'application/json',
+				        'ngrok-skip-browser-warning': true  
+				    },
+				    body: JSON.stringify({ name, contactInfo : contact_info }) 
+				});
+}
+
+
+
 async function AddSupplier() {
     const name = document.getElementById("name").value.trim();
     const contact_info = document.getElementById("contact_info").value.trim();
@@ -11,28 +25,78 @@ async function AddSupplier() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/createSupplier`, {
-            method: 'POST',
-			    headers: {
-			        'Content-Type': 'application/json',
-			        'ngrok-skip-browser-warning': true  // To skip ngrok browser warnings
-			    },
-			    body: JSON.stringify({ name, contactInfo : contact_info }) // Send category data as JSON
-			});
+        const response = await addSupplierApi(name, contact_info);
+		if (!response.ok) throw new Error('Failed to add supplier record');
+		
+		const data = await response.json();
+		console.log("Add Supplier Response->JSON Data", data);
 
-
-        if (!response.ok) throw new Error('Failed to add supplier record');
-
-        alert("Supplier record successfully added.");
-        clearForm();
-        //await getAllSupplier(); // Refresh data after adding
+        
+		if (data.status === 1) {
+		    alert(`${data.message}`);
+		} else {
+		    alert(`Failed to Add the record: ${data.message}`);
+		}
+		
     } catch (error) {
         console.error("Error:", error);
         alert("Failed to add the supplier record. Please try again.");
     }
 }
 
-// Function to update a supplier record
+
+
+
+async function deleteSupplierByIdApi(id){
+	return await fetch(`${API_BASE_URL}/supplier/delete/${id}`, {
+	            method: 'DELETE',
+	            headers: {
+	                'Content-Type': 'application/json',
+	                'ngrok-skip-browser-warning': true
+	            }
+	        });
+}
+
+
+async function deleteRecord(id) {
+    try {
+        const response = await deleteSupplierByIdApi(id);
+        if (!response.ok) throw new Error('Failed to delete supplier record');
+
+        const data = await response.json();
+		console.log("Delete Supplier Response->JSON Data", data);
+		
+		if (data.status === 1) {
+		    alert(`${data.message}`);
+			await getAllSupplier(); 
+		} else {
+		    alert(`Failed to delete the record: ${data.message}`);
+		}
+		
+		
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to delete the supplier record. Please try again.");
+    }
+}
+
+
+
+
+
+
+async function updateSupplierApi(updatedRecord){
+	return await fetch(`${API_BASE_URL}/supplier/updateSupplier`, {
+	            method: 'PUT',
+	            headers: {
+	                'Content-Type': 'application/json',
+	                'ngrok-skip-browser-warning': true
+	            },
+	            body: JSON.stringify(updatedRecord)
+	        });
+}
+
+
 async function updateSupplier(row) {
     const id = parseInt(row.querySelector(".id-field").value);
     const name = row.querySelector(".name-field").value.trim();
@@ -43,35 +107,23 @@ async function updateSupplier(row) {
         return;
     }
 
-    // Prepare the updated data
     const updatedRecord = { id, name: name, contactInfo : contact_info };
-    console.log("Updated Record:", updatedRecord); // Log updated record for debugging
+    console.log("New Details to be Updated are going to backend", updatedRecord); 
 
     try {
-        const response = await fetch(`https://d070-103-55-91-195.ngrok-free.app/supplier/updateSupplier`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': true
-            },
-            body: JSON.stringify(updatedRecord)
-        });
+        const response = await updateSupplierApi(updatedRecord);
+		if (!response.ok) throw new Error('Failed to update supplier record');
 
-        if (response.ok) {
-            const data = await response.json();
-			console.log("Updated Value", data);
+		const data = await response.json();
+		console.log("Update Supplier Response->JSON Data", data);
 
-            if (data.status === 1) {  // Assuming 1 indicates success in your API
-                alert("Supplier record successfully updated.");
-                await getAllSupplier();  // Refresh data after updating
-            } else {
-                alert(`Failed to update the supplier record: ${data.message}`);
-            }
-        } else {
-            // Handle server error responses
-            const errorData = await response.json();  // Try to get the error message from the response
-            alert(`Failed to update the supplier record: ${errorData.message || response.statusText}`);
-        }
+		if (data.status === 1) {
+		    alert(`${data.message}`);
+			await getAllSupplier(); 
+		} else {
+		    alert(`Failed to update the supplier record: ${data.message}`);
+		}
+
     } catch (error) {
         console.error("An error occurred while updating the supplier record:", error);
         alert("Failed to update the supplier record. Please try again.");
@@ -82,128 +134,6 @@ async function updateSupplier(row) {
 
 
 
-
-// Function to get a supplier record by ID
-async function getSupplierById() {
-    const id = document.getElementById("id").value.trim();
-
-    if (!id) {
-        alert("Please provide an ID.");
-        return;
-    }
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': true
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("DataById", data);
-
-        if (data.status === 1 && data.data) {
-            displayData([data.data]);
-        } else {
-            alert("No record found for the provided ID.");
-            displayData([]);
-        }
-    } catch (error) {
-        console.error("Error fetching data by ID:", error);
-        alert("Failed to fetch data from the API.");
-    }
-}
-
-// Function to get all supplier records
-async function getAllSupplier() {
-    try {
-        const response = await fetch(`${API_BASE_URL}/getallSupplier?pageNo=0`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': true
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch supplier records');
-        }
-
-        const data = await response.json();
-        
-        if (data.status === 1 && data.data) {
-            displayData(data.data);
-        } else {
-            alert("No supplier records found or there was an issue with the response.");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to fetch supplier records. Please try again.");
-    }
-}
-
-// Function to display supplier records
-function displayData(suppliers) {
-    const outputDiv = document.getElementById("output");
-    outputDiv.innerHTML = ""; // Clear previous output
-
-    if (!suppliers || suppliers.length === 0) {
-        outputDiv.innerHTML = "<p>No suppliers found</p>";
-        return;
-    }
-
-    const table = document.createElement("table");
-    table.className = "w-full border border-gray-300";
-
-    const thead = document.createElement("thead");
-    thead.innerHTML = `
-        <tr class="bg-gray-200 border-b border-gray-300">
-            <th class="p-2 border-r border-gray-300 text-center">ID</th>
-            <th class="p-2 border-r border-gray-300 text-center">Name</th>
-            <th class="p-2 border-r border-gray-300 text-center">Contact Info</th>
-            <th class="p-2 border-gray-300 text-center">Action</th>
-        </tr>
-    `;
-    table.appendChild(thead);
-
-    const tbody = document.createElement("tbody");
-    suppliers.forEach(supplier => {
-        const row = document.createElement("tr");
-        row.className = "border-b border-gray-300";
-
-        row.innerHTML = `
-			<td class="p-2 border-r border-gray-300 text-center">
-			    <input type="text" class="id-field w-full p-1 border-none text-center focus:ring-0" value="${supplier.id}" readonly>
-			</td>
-			<td class="p-2 border-r border-gray-300 text-center">
-			    <input type="text" class="name-field w-full p-1 border-none text-center focus:ring-0" value="${supplier.name}" readonly>
-			</td>
-			<td class="p-2 border-r border-gray-300 text-center">
-				<input type="text" class="contact-info-field w-full p-1 border-none text-center focus:ring-0" value="${supplier.contactInfo}" readonly>
-			</td>
-			<td class="p-2 text-center border-gray-300">
-			    <button class="bg-yellow-500 text-white py-1 px-2 rounded hover:bg-yellow-600"
-			            onclick="toggleEdit(this)">
-			        <i class="fas fa-edit"></i>
-			    </button>
-			    <button class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600"
-			            onclick="deleteRecord(${supplier.id})">
-			        <i class="fas fa-trash"></i>
-			    </button>
-			</td>
-        `;
-        tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
-
-    outputDiv.appendChild(table);
-}
 
 // Function to toggle edit mode
 function toggleEdit(button) {
@@ -247,31 +177,7 @@ function saveSupplier(button) {
     toggleEdit(button);
 }
 
-// Function to delete a supplier record
-async function deleteRecord(id) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/delete/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': true
-            }
-        });
 
-        if (!response.ok) throw new Error('Failed to delete supplier record');
-
-        const data = await response.json();
-        if (data.status === 1) {
-            alert("Supplier record successfully deleted.");
-            await getAllSupplier(); // Refresh the supplier list after deleting
-        } else {
-            alert("Failed to delete the supplier record.");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to delete the supplier record. Please try again.");
-    }
-}
 
 // Function to clear form fields
 function clearForm() {
@@ -279,7 +185,5 @@ function clearForm() {
     document.getElementById("contact_info").value = '';
 }
 
-// Bind click events to buttons
-document.getElementById("getById1").addEventListener("click", getSupplierById);
-document.getElementById("getAllSupplier").addEventListener("click", getAllSupplier);
+
 

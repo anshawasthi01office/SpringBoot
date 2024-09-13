@@ -81,6 +81,7 @@
 
     <!-- Link to external JavaScript file -->
     <script src="../../resources/js/category.js"></script>
+    <script src="../../resources/js/getCategory.js"></script>
 </body>
 
 </html>

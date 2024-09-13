@@ -58,7 +58,7 @@
                             <option value="" disabled selected>Select Category</option>
                             <option value="Electronics">Electronics</option>
                             <option value="Clothing">Clothing</option>
-                            <option value="Furniture">Home appliances</option>
+                            <option value="Home appliances">Home appliances</option>
                             <option value="Test">test</option>
                         </select>
                     </div>
